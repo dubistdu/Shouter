@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  constraints Clearance::Constraints::SignedIn.new do
+    root to: "dashboards#show"
+  end
   root to: "homes#show"
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   # Don't make sessions to go to default clearnace session,instead direct it to sessions controller we made to ride over default
