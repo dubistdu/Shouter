@@ -1,4 +1,9 @@
 class ShoutsController < ApplicationController
+
+  def show
+    @shout = Shout.find(params[:id])
+  end
+
   def create
     shout = current_user.shouts.create(shout_params)
     # redirect to dashborad and show if either it was a success or not

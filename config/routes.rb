@@ -3,12 +3,12 @@ Rails.application.routes.draw do
     root to: "dashboards#show"
   end
   root to: "homes#show"
-  resources :shouts, only: [:create]
+  resources :shouts, only: [:create, :show]
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   # Don't make sessions to go to default clearnace session,instead direct it to sessions controller we made to ride over default
   resource :session, only: [:create]
 
-  resources :users, only: [:create] do
+  resources :users, only: [:create, :show] do
     resource :password,
       controller: "clearance/passwords",
       only: [:create, :edit, :update]

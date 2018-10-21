@@ -1,0 +1,8 @@
+<div>
+<!-- redirect to user page -->
+  <%= link_to shout.username, shout.user %> shouted
+  <%= shout.body %>
+  <%= link_to shout do %>
+    <%= time_ago_in_words(shout.created_at)%> ago
+  <% end %>
+</div>
