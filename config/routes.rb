@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root to: "homes#show"
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
-  resource :session, controller: "clearance/sessions", only: [:create]
+  # Don't make sessions to go to default clearnace session,instead direct it to sessions controller we made to ride over default
+  resource :session, only: [:create]
 
   resources :users, only: [:create] do
     resource :password,
@@ -9,8 +10,9 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
   end
 
-  get "/sign_in" => "clearance/sessions#new", as: "sign_in"
-  delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
-  get "/sign_up" => "clearance/users#new", as: "sign_up"
+# use our sessions controller that we created instead of Clearnce sessions controller
+  get "/sign_in" => "sessions#new", as: "sign_in"
+  delete "/sign_out" => "sessions#destroy", as: "sign_out"
+  get "/sign_up" => "users#new", as: "sign_up"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
